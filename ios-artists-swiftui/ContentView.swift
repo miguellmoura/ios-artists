@@ -15,6 +15,8 @@ struct ContentView: View {
         
         ObraDeArte(titulo: "Litoral Paranaense", artista: "Ricardo Krieger", ano: 1975, estilo: "Figurativo", imagemNome: "litoral", descricao: "Uma representação das belas paisagens do litoral paranaense, onde Krieger capturou a tranquilidade e beleza da natureza em cores vibrantes e texturas marcantes."),
         ObraDeArte(titulo: "Dama da Louça", artista: "Toto Lopes", ano: 1990, estilo: "Escultura", imagemNome: "loucacerta", descricao: "Escultura emblemática de Toto Lopes, retratando uma figura feminina de grande delicadeza, com detalhes que evocam a fragilidade e a beleza da porcelana. Feita com mais de 280 pratos"),
+        ObraDeArte(titulo: "Painel de Azulejos", artista: "Poty Lazzarotto", ano: 1960, estilo: "Modernismo", imagemNome: "potylazaroto", descricao: "Um dos mais icônicos trabalhos de Poty Lazzarotto, esse painel retrata cenas cotidianas de Curitiba em azulejos, uma obra de grande valor histórico e cultural."),
+        ObraDeArte(titulo: "Passeio público", artista: "Guido Viaro", ano: 1936, estilo: "Modernismo", imagemNome: "passpublico_viaro", descricao: "Obra que representa a paisagem do passeio público de Curitiba, destacando seus elementos naturais. Com uma técnica inovadora, Viaro buscou traduzir a essência local."),
     ]
 
     let colunas = [
