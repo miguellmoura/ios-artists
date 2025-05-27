@@ -26,13 +26,13 @@ struct DetalhesObraView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
-                Text("Artista: (obra.artista)")
+                Text("Artista: \(obra.artista)")
                     .font(.title2)
 
-                Text("Ano: (obra.ano)")
+                Text("Ano: \(obra.ano)")
                     .font(.title3)
 
-                Text("Estilo: (obra.estilo)")
+                Text("Estilo: \(obra.estilo)")
                     .font(.title3)
 
                 Text("Descrição:")
