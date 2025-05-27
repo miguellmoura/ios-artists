@@ -16,6 +16,7 @@ struct DetalhesObraView: View {
                 Image(obra.imagemNome)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                // imagem maior, tenta ocupar todo o espaço disponivel na view
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.gray.opacity(0.2))
@@ -48,6 +49,7 @@ struct DetalhesObraView: View {
 
 #Preview {
 
+    // obra de arte de exemplo para o preview
         let obraExemplo = ObraDeArte(
             titulo: "Mona Lisa",
             artista: "Leonardo da Vinci",

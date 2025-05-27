@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    // obras de arte incluidas
     let obras: [ObraDeArte] = [
         ObraDeArte(titulo: "Painel de Azulejos", artista: "Poty Lazzarotto", ano: 1960, estilo: "Modernismo", imagemNome: "potylazaroto", descricao: "Um dos mais icônicos trabalhos de Poty Lazzarotto, esse painel retrata cenas cotidianas de Curitiba em azulejos, uma obra de grande valor histórico e cultural."),
         ObraDeArte(titulo: "Passeio público", artista: "Guido Viaro", ano: 1936, estilo: "Modernismo", imagemNome: "passpublico_viaro", descricao: "Obra que representa a paisagem do passeio público de Curitiba, destacando seus elementos naturais. Com uma técnica inovadora, Viaro buscou traduzir a essência local."),
