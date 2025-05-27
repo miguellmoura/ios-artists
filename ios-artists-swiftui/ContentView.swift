@@ -9,78 +9,56 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    let obras: [ObraDeArte] = [
+        ObraDeArte(titulo: "Painel de Azulejos", artista: "Poty Lazzarotto", ano: 1960, estilo: "Modernismo", imagemNome: "potylazaroto", descricao: "Um dos mais icônicos trabalhos de Poty Lazzarotto, esse painel retrata cenas cotidianas de Curitiba em azulejos, uma obra de grande valor histórico e cultural."),
+        ObraDeArte(titulo: "Passeio público", artista: "Guido Viaro", ano: 1936, estilo: "Modernismo", imagemNome: "passpublico_viaro", descricao: "Obra que representa a paisagem do passeio público de Curitiba, destacando seus elementos naturais. Com uma técnica inovadora, Viaro buscou traduzir a essência local."),
+        
+        ObraDeArte(titulo: "Litoral Paranaense", artista: "Ricardo Krieger", ano: 1975, estilo: "Figurativo", imagemNome: "litoral", descricao: "Uma representação das belas paisagens do litoral paranaense, onde Krieger capturou a tranquilidade e beleza da natureza em cores vibrantes e texturas marcantes."),
+        ObraDeArte(titulo: "Dama da Louça", artista: "Toto Lopes", ano: 1990, estilo: "Escultura", imagemNome: "loucacerta", descricao: "Escultura emblemática de Toto Lopes, retratando uma figura feminina de grande delicadeza, com detalhes que evocam a fragilidade e a beleza da porcelana. Feita com mais de 280 pratos"),
+    ]
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    let colunas = [
+        // cada item ocupa 150 pixels
+        GridItem(.adaptive(minimum: 150))
+    ]
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+            // laxyvgrid em scrollview para tornar as imagens responsivas
+            ScrollView {
+                LazyVGrid(columns: colunas, spacing: 20) {
+                    ForEach(obras) { obra in
+                        NavigationLink(destination: DetalhesObraView(obra: obra)) {
+                            VStack {
+                                // vstack para alinhar verticalmente a imagem, titulo e artista da obra
+                                Image(obra.imagemNome)
+                                    .resizable()
+                                    .aspectRatio(1, contentMode: .fit)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.2))
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                                Text(obra.titulo)
+                                    .font(.headline)
+                                Text(obra.artista)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding()
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            .shadow(radius: 5)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .padding()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            .navigationTitle("Obras de Arte")
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
-#Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-}
+//
+//#Preview {
+//    ContentView()
+//}
